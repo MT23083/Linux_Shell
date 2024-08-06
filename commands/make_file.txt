@@ -1,0 +1,28 @@
+# Compiler and flags
+CXX = g++
+CXXFLAGS = -g -Wall
+
+# Source files and the executable name
+SRCS = shell_main.cpp command.cpp cd_command.cpp cp_command.cpp ls_command.cpp mv_command.cpp rm_command.cpp
+EXECUTABLE = shell
+
+# Debugging tools
+GDB = gdb
+
+# Targets
+all: $(EXECUTABLE)
+
+$(EXECUTABLE): $(SRCS)
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
+.PHONY: run
+run: $(EXECUTABLE)
+	./$(EXECUTABLE)
+
+.PHONY: debug
+debug: $(EXECUTABLE)
+	$(GDB) ./$(EXECUTABLE)
+
+.PHONY: clean
+clean:
+	rm -f $(EXECUTABLE)
